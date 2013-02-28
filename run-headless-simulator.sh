@@ -70,19 +70,4 @@ unset DYLD_ROOT_PATH
 unset DYLD_FRAMEWORK_PATH
 unset IPHONE_SIMULATOR_ROOT
 
-PRODUCT_NAME_NO_SPACES=$(echo $PRODUCT_NAME | tr ' ' '_')
-OUTPUTDIR="$PROJECT_DIR/build/${PRODUCT_NAME_NO_SPACES}-test-results"
-echo "Making dir $OUTPUTDIR"
-mkdir -p "$OUTPUTDIR"
-
-# GHUnit can write JUNIT xml, if this was done, copy to $BUILD_DIR
-if [ -n "$WRITE_JUNIT_XML" ]; then
-  MY_TMPDIR=`/usr/bin/getconf DARWIN_USER_TEMP_DIR`
-  RESULTS_DIR="${MY_TMPDIR}test-results"
-
-  if [ -d "$RESULTS_DIR" ]; then
-    `$CP -r "$RESULTS_DIR/." "$OUTPUTDIR" && rm -r "$RESULTS_DIR"`
-  fi
-fi
-
 exit $RETVAL
