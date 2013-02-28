@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # most of this taken from
 # http://code.google.com/p/google-toolbox-for-mac/source/browse/trunk/UnitTesting/
@@ -70,7 +70,8 @@ unset DYLD_ROOT_PATH
 unset DYLD_FRAMEWORK_PATH
 unset IPHONE_SIMULATOR_ROOT
 
-OUTPUTDIR="$PROJECT_DIR/build/${PRODUCT_NAME}-test-results"
+PRODUCT_NAME_NO_SPACES=$(echo $PRODUCT_NAME | tr ' ' '_')
+OUTPUTDIR="$PROJECT_DIR/build/${PRODUCT_NAME_NO_SPACES}-test-results"
 echo "Making dir $OUTPUTDIR"
 mkdir -p "$OUTPUTDIR"
 
