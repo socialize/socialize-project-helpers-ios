@@ -28,4 +28,23 @@ OUTPUT_DIR="${PROJECT_DIR}/build/test-coverage/${PRODUCT_NAME}"
 mkdir -p "$OUTPUT_DIR"
 rm -rf "${OUTPUT_DIR}"
 
-osascript ${THISDIR}/export-coverstory.scpt "${INTERMEDIATES}" "${OUTPUT_DIR}"
+osascript - "${INTERMEDIATES}" "${OUTPUT_DIR}" <<EOF
+on run argv
+
+    try
+    tell Application "CoverStory"
+      activate
+    end tell
+    on error err
+      log "\n\n-- Coverstory not found, download coverstory to export html coverage report"
+      return
+    end try
+
+    tell application "CoverStory"
+        set x to open (item 1 of argv)
+        tell x to export to HTML in (item 2 of argv)
+    end tell
+    
+    return "\n\nExported CoverStory HTML to " & "'" & item 2 of argv & "'"
+end run
+EOF
