@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # most of this taken from
 # http://code.google.com/p/google-toolbox-for-mac/source/browse/trunk/UnitTesting/
