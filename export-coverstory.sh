@@ -40,9 +40,15 @@ on run argv
       return
     end try
 
+    tell application "System Events"
+      click menu item "Reload Data" of \
+        (process "CoverStory")'s (menu bar 1)'s \
+        (menu bar item "View")'s (menu "View")
+    end tell
+
     tell application "CoverStory"
-        set x to open (item 1 of argv)
-        tell x to export to HTML in (item 2 of argv)
+        set doc to open (item 1 of argv)
+        tell doc to export to HTML in (item 2 of argv)
     end tell
     
     return "\n\nExported CoverStory HTML to " & "'" & item 2 of argv & "'"
